@@ -1,0 +1,27 @@
+- name: Ansible Playbook to Install and Setup Apache on amazon linux
+  hosts: apache
+  tasks:
+    - name: install apache 
+      yum: 
+        name: httpd 
+        state: present 
+    - name: start apache 
+      service: 
+        name: httpd 
+        state: started 
+    - name: Download static website
+      get_url:
+        url: https://www.free-css.com/assets/files/free-css-templates/download/page293/emailler.zip
+        dest: /tmp/emailler.zip
+    - name: Unarchive a file that needs to be downloaded (added in 2.0)
+      unarchive:
+        src: https://www.free-css.com/assets/files/free-css-templates/download/page293/emailler.zip
+        dest: /var/www/html/
+        remote_src: yes
+    - name: Unarchive a file that needs to be downloaded (added in 2.0)
+      command: systemctl restart httpd 
+
+    
+
+      
+      

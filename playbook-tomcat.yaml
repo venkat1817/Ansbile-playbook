@@ -1,0 +1,24 @@
+- name: Ansible Playbook to Install and Setup Apache on amazon linux
+  hosts: tomcat
+  tasks:
+    - name: installing java 
+      yum: 
+        name: java 
+        state: present 
+    - name: install tomcat 
+      get_url: 
+        url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.76/bin/apache-tomcat-9.0.76-windows-x64.zip
+        dest: /opt/apache-tomcat-9.0.76-windows-x64.zip
+    - name: extract tomcat 
+      unarchive: 
+        src: /opt/apache-tomcat-9.0.76-windows-x64.zip
+        dest: /opt/ 
+        remote_src: yes
+    - name: start tomcat 
+      command: /opt/apache-tomcat-9.0.76/bin/startup.sh 
+
+    - name: deploy war file 
+      get_url: 
+        url: http://war 
+        dest: /opt/apache-tomcat-9.0.76/webapps/ 
+        
